@@ -14,7 +14,6 @@ namespace SinDI.Tests
 			_container = new SinContainer();
 		}
 
-
 		[Test]
 		public void Conainter_RegisterInstance_RegistrationSuccesfull()
 		{
@@ -26,5 +25,29 @@ namespace SinDI.Tests
 
 			Assert.AreSame(elem, result);
 		}
+
+		[Test]
+		public void Container_RegisterInterface_ResolvesInstanceSuccesfully()
+		{
+			_container.Register<ITestObj, TestObj>();
+
+			var result = _container.Resolve<ITestObj>();
+
+			Assert.NotNull(result);
+		}
+
+		[Test]
+		public void Container_RegisterInstance_ResolvesInstanceSuccesfull()
+		{
+			_container.Register<TestObj>();
+
+			var result = _container.Resolve<TestObj>();
+
+			Assert.NotNull(result);
+		}
 	}
+
+	internal interface ITestObj { }
+
+	internal class TestObj : ITestObj { }
 }
