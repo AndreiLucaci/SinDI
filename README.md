@@ -1,0 +1,2 @@
+# SinDI
+Simple DI container
