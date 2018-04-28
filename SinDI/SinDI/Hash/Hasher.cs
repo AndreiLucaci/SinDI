@@ -10,7 +10,7 @@ namespace SinDI.Hash
 
 		public ulong ComputeHash(Type type)
 		{
-			return ComputeHash(type.AssemblyQualifiedName);
+			return ComputeHash(type.FullName);
 		}
 
 		private ulong ComputeHash(string input)

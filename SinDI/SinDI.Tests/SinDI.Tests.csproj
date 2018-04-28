@@ -54,7 +54,12 @@
   </Choose>
   <ItemGroup>
     <Compile Include="ContainerTests.cs" />
+    <Compile Include="KnownCtorTests.cs" />
+    <Compile Include="Stubs\ITestObj.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Stubs\TestObj.cs" />
+    <Compile Include="Stubs\TestObjComplex.cs" />
+    <Compile Include="Stubs\TestObjComplexWithSingleConstructor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
