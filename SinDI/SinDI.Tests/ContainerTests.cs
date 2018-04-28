@@ -1,5 +1,5 @@
-﻿using System;
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using SinDI.Tests.Stubs;
 
 namespace SinDI.Tests
 {
@@ -46,8 +46,4 @@ namespace SinDI.Tests
 			Assert.NotNull(result);
 		}
 	}
-
-	internal interface ITestObj { }
-
-	internal class TestObj : ITestObj { }
 }
