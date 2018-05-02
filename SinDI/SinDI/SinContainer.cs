@@ -81,12 +81,14 @@ namespace SinDI
 			var constructorParams = new List<object>();
 			foreach (var param in knownCtor.InjectionParams)
 			{
-				if (param is KnownParam knownParam)
-				{
-					constructorParams.Add(Resolve(knownParam.Value));
-				}
-
-				constructorParams.Add(param);
+			    if (param is KnownParam knownParam)
+			    {
+			        constructorParams.Add(Resolve(knownParam.Value));
+			    }
+			    else
+			    {
+			        constructorParams.Add(param);
+			    }
 			}
 			return constructorParams.ToArray();
 		}
