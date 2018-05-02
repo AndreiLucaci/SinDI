@@ -7,7 +7,7 @@ namespace SinDI.Tests
 	[TestFixture]
 	public class KnownCtorTests
 	{
-		private const string Expecteditem = "expectedItem";
+		private const string ExpectedItem = "expectedItem";
 		private ISinContainer _container;
 
 		[SetUp]
@@ -19,7 +19,7 @@ namespace SinDI.Tests
 		[Test]
 		public void Container_KnownCtorWithConcreteParam_ResolvesSuccesfully()
 		{
-			ITestObj expectedTestObj = new TestObj {Item = Expecteditem};
+			ITestObj expectedTestObj = new TestObj {Item = ExpectedItem};
 
 			_container.Register<TestObjComplex>(new KnownCtor(expectedTestObj));
 
@@ -32,7 +32,7 @@ namespace SinDI.Tests
 		[Test]
 		public void Container_KnownCtorWithRegisteredTypes_ResolvesSuccesfully()
 		{
-			ITestObj expectedTestObj = new TestObj { Item = Expecteditem };
+			ITestObj expectedTestObj = new TestObj { Item = ExpectedItem };
 
 			_container.Register(expectedTestObj);
 			_container.Register<TestObjComplexWithSingleConstructor>();
@@ -54,6 +54,28 @@ namespace SinDI.Tests
 			Assert.NotNull(result);
 			Assert.NotNull(result.Obj1);
 			Assert.Null(result.Obj1.Item);
+		}
+
+
+		[Test]
+		public void Container_KnownCtorWithTypeRegisteredV_ResolvesSuccesfullyViaKnownParam()
+		{
+            ITestObj testObj = new TestObj
+            {
+                Item = ExpectedItem
+            };
+
+            _container.Register(testObj);
+			_container.Register<TestObjComplex>(new KnownCtor(new KnownParam<ITestObj>()));
+
+			var result = _container.Resolve<TestObjComplex>();
+
+			Assert.NotNull(result);
+			Assert.NotNull(result.Obj1);
+			Assert.NotNull(result.Obj1.Item);
+
+            Assert.AreEqual(testObj, result.Obj1);
+            Assert.AreEqual(testObj.Item, result.Obj1.Item);
 		}
 	}
 }
