@@ -56,7 +56,7 @@ container.Register<ConcreteObject>();
 var resolvedConcreteObject = container.Resolve<ConcreteObject>();
 ```
 
-### 6. Registration with known constructor - already registered object type via interface
+6. Registration with known constructor - already registered object type via interface
 
 ```cs
 class ConcreteObject
@@ -72,6 +72,25 @@ class ConcreteObject
 ISinContainer container = new SinContainer();
 container.Register<ISomeObject, SomeObject>();
 container.Register<ConcreteObject>();
+var resolvedConcreteObject = container.Resolve<ConcreteObject>();
+```
+
+7. Registration with known constructor and known parameter - already registered object type via interface
+
+```cs
+class ConcreteObject
+{
+    public ConcreteObject(ISomeObject someObject)
+    {
+        // implementation
+    }
+}
+
+// ...
+ISomeObject someObject = new SomeObject();
+ISinContainer container = new SinContainer();
+container.Register(someObject);
+container.Register<ConcreteObject>(new KnownCtor(new KnownParam<ISomeObject>());
 var resolvedConcreteObject = container.Resolve<ConcreteObject>();
 ```
 
